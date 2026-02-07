@@ -1,0 +1,53 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem 0.5rem;
+  background: slategray;
+  color: white;
+  border-bottom: 1px solid #e5e7ef;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+  height: 28px;
+  gap: 0.5rem;
+  -webkit-app-region: drag;
+  user-select: none;
+}
+
+.app-header-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  -webkit-app-region: no-drag;
+  user-select: auto;
+  padding-left: 0.5rem;
+}
+
+.app-header-content a {
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.window-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+    color: white;
+  -webkit-app-region: no-drag;
+}
+
+.window-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  transition: background-color 0.15s;
+}
+
+.window-close-btn:hover {
+  background: #e81123;
+}

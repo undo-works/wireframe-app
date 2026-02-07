@@ -1,10 +1,11 @@
 import './App.css'
-import AppHeader from './components/AppHeader'
+import AppHeader from './components/header/AppHeader'
 import CanvasStage from './components/CanvasStage'
 import CanvasToolbar from './components/CanvasToolbar'
 import NewCanvasPanel from './components/NewCanvasPanel'
 import PagesPanel from './components/PagesPanel'
 import PropertiesPanel from './components/PropertiesPanel'
+import WorkspaceBar from './components/WorkspaceBar'
 import useCanvasProject from './hooks/useCanvasProject'
 
 function App() {
@@ -47,47 +48,29 @@ function App() {
       />
 
       <main className="app-main">
-        <NewCanvasPanel form={form} onChange={setForm} onCreate={handleCreateProject} error={error} />
-
         <section className="workspace">
-          <div className="workspace-header">
-            <div>
-              <h2>{project?.name ?? 'プロジェクト未作成'}</h2>
-              {project && (
-                <p className="sub">
-                  キャンバス: {project.canvas.width} × {project.canvas.height} {project.canvas.unit}
-                </p>
+          <WorkspaceBar project={project} />
+
+          <div className="workspace-frame">
+            <div className="left-stack">
+              <NewCanvasPanel form={form} onChange={setForm} onCreate={handleCreateProject} error={error} />
+              {project ? (
+                <PagesPanel
+                  pages={project.pages}
+                  activePageId={project.activePageId}
+                  onAdd={handleAddPage}
+                  onSelect={setActivePage}
+                  onRename={handleRenamePage}
+                  onRemove={handleRemovePage}
+                />
+              ) : (
+                <PagesPanel pages={[]} activePageId="" onAdd={handleAddPage} onSelect={() => {}} onRename={() => {}} onRemove={() => {}} />
               )}
             </div>
-            {project && (
-              <div className="workspace-actions">
-                <button className="ghost" onClick={handleAddPage}>
-                  ページ追加
-                </button>
-                <button className="ghost" onClick={() => fileInputRef.current?.click()}>
-                  既存ファイル読み込み
-                </button>
-              </div>
-            )}
-          </div>
 
-          <div className="workspace-body">
-            {project ? (
-              <PagesPanel
-                pages={project.pages}
-                activePageId={project.activePageId}
-                onAdd={handleAddPage}
-                onSelect={setActivePage}
-                onRename={handleRenamePage}
-                onRemove={handleRemovePage}
-              />
-            ) : (
-              <PagesPanel pages={[]} activePageId="" onAdd={handleAddPage} onSelect={() => {}} onRename={() => {}} onRemove={() => {}} />
-            )}
-
-            <section className="canvas-panel">
-              {project ? (
-                <>
+            <div className="canvas-area">
+              <div className="canvas-top">
+                {project ? (
                   <CanvasToolbar
                     tool={tool}
                     onToolChange={setTool}
@@ -97,6 +80,13 @@ function App() {
                     onReorder={handleReorder}
                     canEditSelection={Boolean(selectedNode)}
                   />
+                ) : (
+                  <div className="canvas-top-empty">キャンバス設定を入力して新規作成してください。</div>
+                )}
+              </div>
+
+              <div className="canvas-shell">
+                {project ? (
                   <CanvasStage
                     canvas={project.canvas}
                     activePage={activePage}
@@ -107,14 +97,17 @@ function App() {
                     onNodePointerDown={handleNodePointerDown}
                     onResizePointerDown={handleResizePointerDown}
                   />
-                  <PropertiesPanel selectedNode={selectedNode} onUpdateNode={updateSelectedNode} />
-                </>
-              ) : (
-                <div className="canvas-empty">
-                  <p>プロジェクトを作成または読み込んでください。</p>
-                </div>
-              )}
-            </section>
+                ) : (
+                  <div className="canvas-empty">
+                    <p>プロジェクトを作成または読み込んでください。</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <aside className="properties-panel">
+              <PropertiesPanel selectedNode={selectedNode} onUpdateNode={updateSelectedNode} />
+            </aside>
           </div>
         </section>
       </main>
