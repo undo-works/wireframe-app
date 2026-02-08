@@ -1,14 +1,17 @@
-import type { CanvasNode } from './types'
+import type { CanvasNode } from "./types";
 
 type PropertiesPanelProps = {
   // 選択中ノード。未選択ならnull。
-  selectedNode: CanvasNode | null
+  selectedNode: CanvasNode | null;
   // 選択ノードへの変更適用。
-  onUpdateNode: (updater: (node: CanvasNode) => CanvasNode) => void
-}
+  onUpdateNode: (updater: (node: CanvasNode) => CanvasNode) => void;
+};
 
 // 右側のプロパティ編集パネル。
-export default function PropertiesPanel({ selectedNode, onUpdateNode }: PropertiesPanelProps) {
+export default function PropertiesPanel({
+  selectedNode,
+  onUpdateNode,
+}: PropertiesPanelProps) {
   return (
     <div className="properties">
       <h3>プロパティ</h3>
@@ -133,19 +136,19 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }: Properti
               }
             />
           </label>
-          {selectedNode.type === 'text' && (
+          {selectedNode.type === "text" && (
             <>
               <label>
                 テキスト
                 <input
-                  value={selectedNode.text?.value ?? ''}
+                  value={selectedNode.text?.value ?? ""}
                   onChange={(event) =>
                     onUpdateNode((node) => ({
                       ...node,
                       text: {
                         value: event.target.value,
                         size: node.text?.size ?? 16,
-                        color: node.text?.color ?? '#111827',
+                        color: node.text?.color ?? "#111827",
                       },
                     }))
                   }
@@ -161,9 +164,9 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }: Properti
                     onUpdateNode((node) => ({
                       ...node,
                       text: {
-                        value: node.text?.value ?? 'Text',
+                        value: node.text?.value ?? "Text",
                         size: Number(event.target.value),
-                        color: node.text?.color ?? '#111827',
+                        color: node.text?.color ?? "#111827",
                       },
                     }))
                   }
@@ -173,12 +176,12 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }: Properti
                 文字色
                 <input
                   type="color"
-                  value={selectedNode.text?.color ?? '#111827'}
+                  value={selectedNode.text?.color ?? "#111827"}
                   onChange={(event) =>
                     onUpdateNode((node) => ({
                       ...node,
                       text: {
-                        value: node.text?.value ?? 'Text',
+                        value: node.text?.value ?? "Text",
                         size: node.text?.size ?? 16,
                         color: event.target.value,
                       },
@@ -193,5 +196,5 @@ export default function PropertiesPanel({ selectedNode, onUpdateNode }: Properti
         <p className="muted">オブジェクトを選択してください。</p>
       )}
     </div>
-  )
+  );
 }

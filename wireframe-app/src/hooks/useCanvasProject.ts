@@ -1,7 +1,7 @@
-import { useRef } from 'react'
-import useCanvasInteractions from './useCanvasInteractions'
-import useCanvasSelection from './useCanvasSelection'
-import useProjectState from './useProjectState'
+import { useRef } from "react";
+import useCanvasInteractions from "./useCanvasInteractions";
+import useCanvasSelection from "./useCanvasSelection";
+import useProjectState from "./useProjectState";
 
 // キャンバス編集に関わる状態と操作をまとめたカスタムフック。
 export default function useCanvasProject() {
@@ -21,7 +21,7 @@ export default function useCanvasProject() {
     handleRemovePage,
     setActivePage,
     updateCanvas,
-  } = useProjectState()
+  } = useProjectState();
 
   const {
     tool,
@@ -33,17 +33,17 @@ export default function useCanvasProject() {
     handleDeleteSelected,
     handleReorder,
     updateSelectedNode,
-  } = useCanvasSelection(updateActivePage)
+  } = useCanvasSelection(updateActivePage);
 
   const {
     canvasRef,
     handleCanvasPointerDown,
     handleNodePointerDown,
     handleResizePointerDown,
-  } = useCanvasInteractions(project, tool, updateActivePage, setSelectedId)
+  } = useCanvasInteractions(project, tool, updateActivePage, setSelectedId);
 
-  const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const selectedNode = getSelectedNode(activePage)
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const selectedNode = getSelectedNode(activePage);
 
   return {
     project,
@@ -59,31 +59,31 @@ export default function useCanvasProject() {
     selectedId,
     selectedNode,
     handleCreateProject: () => {
-      handleCreateProject()
-      clearSelection()
+      handleCreateProject();
+      clearSelection();
     },
     handleOpenFile: async (file: File) => {
-      await handleOpenFile(file)
-      clearSelection()
+      await handleOpenFile(file);
+      clearSelection();
     },
     handleSave,
     handleAddPage: () => {
-      handleAddPage()
-      clearSelection()
+      handleAddPage();
+      clearSelection();
     },
     handleRenamePage,
     handleRemovePage: (pageId: string) => {
-      handleRemovePage(pageId)
-      clearSelection()
+      handleRemovePage(pageId);
+      clearSelection();
     },
     handleCanvasPointerDown,
     handleNodePointerDown,
     handleResizePointerDown,
     handleDeleteSelected: () => handleDeleteSelected(activePage),
-    handleReorder: (direction: 'forward' | 'backward') =>
+    handleReorder: (direction: "forward" | "backward") =>
       handleReorder(direction, activePage),
     updateSelectedNode,
     setActivePage,
     updateCanvas,
-  }
+  };
 }

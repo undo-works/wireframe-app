@@ -1,28 +1,31 @@
-import type React from 'react'
-import type { CanvasNode, CanvasSpec, PageData } from './types'
+import type React from "react";
+import type { CanvasNode, CanvasSpec, PageData } from "./types";
 
 type CanvasStageProps = {
   // キャンバスのサイズ情報。
-  canvas: CanvasSpec
+  canvas: CanvasSpec;
   // アクティブページ情報。
-  activePage: PageData | null
+  activePage: PageData | null;
   // 描画対象ノード一覧。
-  nodes: CanvasNode[]
+  nodes: CanvasNode[];
   // 選択中ノードID。
-  selectedId: string | null
+  selectedId: string | null;
   // 座標変換に使うキャンバス参照。
-  canvasRef: React.RefObject<HTMLDivElement | null>
+  canvasRef: React.RefObject<HTMLDivElement | null>;
   // キャンバスクリック時の処理。
-  onCanvasPointerDown: (event: React.PointerEvent<HTMLDivElement>) => void
+  onCanvasPointerDown: (event: React.PointerEvent<HTMLDivElement>) => void;
   // ノードのドラッグ開始。
-  onNodePointerDown: (event: React.PointerEvent<HTMLDivElement>, node: CanvasNode) => void
+  onNodePointerDown: (
+    event: React.PointerEvent<HTMLDivElement>,
+    node: CanvasNode,
+  ) => void;
   // ノードのリサイズ開始。
   onResizePointerDown: (
     event: React.PointerEvent<HTMLButtonElement>,
     node: CanvasNode,
-    handle: 'nw' | 'ne' | 'sw' | 'se',
-  ) => void
-}
+    handle: "nw" | "ne" | "sw" | "se",
+  ) => void;
+};
 
 // 中央キャンバス。ノードの描画と操作を担う。
 export default function CanvasStage({
@@ -48,7 +51,7 @@ export default function CanvasStage({
         onPointerDown={onCanvasPointerDown}
       >
         {nodes.map((node) => {
-          const isSelected = node.id === selectedId
+          const isSelected = node.id === selectedId;
           const baseStyle: React.CSSProperties = {
             left: node.frame.x,
             top: node.frame.y,
@@ -56,13 +59,13 @@ export default function CanvasStage({
             height: node.frame.h,
             opacity: node.style.opacity,
             transform: `rotate(${node.rotation}deg)`,
-          }
+          };
 
-          if (node.type === 'line') {
+          if (node.type === "line") {
             return (
               <div
                 key={node.id}
-                className={`node line ${isSelected ? 'selected' : ''}`}
+                className={`node line ${isSelected ? "selected" : ""}`}
                 style={{
                   ...baseStyle,
                   height: 2,
@@ -74,60 +77,72 @@ export default function CanvasStage({
                   <div className="selection" style={{ height: 16 }}>
                     <button
                       className="handle ne"
-                      onPointerDown={(event) => onResizePointerDown(event, node, 'ne')}
+                      onPointerDown={(event) =>
+                        onResizePointerDown(event, node, "ne")
+                      }
                     />
                     <button
                       className="handle sw"
-                      onPointerDown={(event) => onResizePointerDown(event, node, 'sw')}
+                      onPointerDown={(event) =>
+                        onResizePointerDown(event, node, "sw")
+                      }
                     />
                   </div>
                 )}
               </div>
-            )
+            );
           }
 
-          if (node.type === 'text') {
+          if (node.type === "text") {
             return (
               <div
                 key={node.id}
-                className={`node text ${isSelected ? 'selected' : ''}`}
+                className={`node text ${isSelected ? "selected" : ""}`}
                 style={{
                   ...baseStyle,
-                  background: 'transparent',
-                  color: node.text?.color ?? '#111827',
+                  background: "transparent",
+                  color: node.text?.color ?? "#111827",
                   fontSize: node.text?.size ?? 16,
                 }}
                 onPointerDown={(event) => onNodePointerDown(event, node)}
               >
-                {node.text?.value ?? 'Text'}
+                {node.text?.value ?? "Text"}
                 {isSelected && (
                   <div className="selection">
                     <button
                       className="handle nw"
-                      onPointerDown={(event) => onResizePointerDown(event, node, 'nw')}
+                      onPointerDown={(event) =>
+                        onResizePointerDown(event, node, "nw")
+                      }
                     />
                     <button
                       className="handle ne"
-                      onPointerDown={(event) => onResizePointerDown(event, node, 'ne')}
+                      onPointerDown={(event) =>
+                        onResizePointerDown(event, node, "ne")
+                      }
                     />
                     <button
                       className="handle sw"
-                      onPointerDown={(event) => onResizePointerDown(event, node, 'sw')}
+                      onPointerDown={(event) =>
+                        onResizePointerDown(event, node, "sw")
+                      }
                     />
                     <button
                       className="handle se"
-                      onPointerDown={(event) => onResizePointerDown(event, node, 'se')}
+                      onPointerDown={(event) =>
+                        onResizePointerDown(event, node, "se")
+                      }
                     />
                   </div>
                 )}
               </div>
-            )
+            );
           }
 
           return (
             <div
               key={node.id}
-              className={`node ${node.type} ${isSelected ? 'selected' : ''}`}
+              className={`node ${node.type} ${isSelected ? "selected" : ""}`}
               style={{
                 ...baseStyle,
                 background: node.style.fill,
@@ -139,32 +154,40 @@ export default function CanvasStage({
                 <div className="selection">
                   <button
                     className="handle nw"
-                    onPointerDown={(event) => onResizePointerDown(event, node, 'nw')}
+                    onPointerDown={(event) =>
+                      onResizePointerDown(event, node, "nw")
+                    }
                   />
                   <button
                     className="handle ne"
-                    onPointerDown={(event) => onResizePointerDown(event, node, 'ne')}
+                    onPointerDown={(event) =>
+                      onResizePointerDown(event, node, "ne")
+                    }
                   />
                   <button
                     className="handle sw"
-                    onPointerDown={(event) => onResizePointerDown(event, node, 'sw')}
+                    onPointerDown={(event) =>
+                      onResizePointerDown(event, node, "sw")
+                    }
                   />
                   <button
                     className="handle se"
-                    onPointerDown={(event) => onResizePointerDown(event, node, 'se')}
+                    onPointerDown={(event) =>
+                      onResizePointerDown(event, node, "se")
+                    }
                   />
                 </div>
               )}
             </div>
-          )
+          );
         })}
         <div className="canvas-meta">
-          <span>{activePage?.name ?? 'Page'}</span>
+          <span>{activePage?.name ?? "Page"}</span>
           <span>
             {canvas.width} × {canvas.height} {canvas.unit}
           </span>
         </div>
       </div>
     </div>
-  )
+  );
 }

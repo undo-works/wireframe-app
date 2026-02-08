@@ -1,19 +1,19 @@
-import type { PageData } from './types'
+import type { PageData } from "./types";
 
 type PagesPanelProps = {
   // プロジェクト内ページ一覧。
-  pages: PageData[]
+  pages: PageData[];
   // 現在アクティブなページID。
-  activePageId: string
+  activePageId: string;
   // ページ追加。
-  onAdd: () => void
+  onAdd: () => void;
   // ページ選択。
-  onSelect: (pageId: string) => void
+  onSelect: (pageId: string) => void;
   // ページ名変更。
-  onRename: (pageId: string, name: string) => void
+  onRename: (pageId: string, name: string) => void;
   // ページ削除。
-  onRemove: (pageId: string) => void
-}
+  onRemove: (pageId: string) => void;
+};
 
 // ページの切替・リネーム・削除を担うサイドバー。
 export default function PagesPanel({
@@ -36,7 +36,7 @@ export default function PagesPanel({
         {pages.map((page) => (
           <div
             key={page.id}
-            className={`page-item ${page.id === activePageId ? 'active' : ''}`}
+            className={`page-item ${page.id === activePageId ? "active" : ""}`}
           >
             <input
               value={page.name}
@@ -52,8 +52,10 @@ export default function PagesPanel({
             </button>
           </div>
         ))}
-        {pages.length === 0 && <p className="muted">プロジェクトを作成してください。</p>}
+        {pages.length === 0 && (
+          <p className="muted">プロジェクトを作成してください。</p>
+        )}
       </div>
     </aside>
-  )
+  );
 }

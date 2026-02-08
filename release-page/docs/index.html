@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wireframe Studio - Download</title>
+    <meta
+      name="description"
+      content="Wireframe StudioのWindows/Linux向けダウンロードページ。"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap");
+
+      :root {
+        --ink: #13212d;
+        --ink-soft: #2a3c4a;
+        --accent: #0ea5a0;
+        --accent-2: #f8b24c;
+        --paper: #f6f2ee;
+        --paper-2: #fff8f1;
+        --line: rgba(19, 33, 45, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: "Zen Kaku Gothic New", system-ui, -apple-system, sans-serif;
+        background: radial-gradient(1200px 600px at 80% -10%, #f9e6c7 0%, rgba(249, 230, 199, 0) 70%),
+          radial-gradient(900px 600px at 10% 0%, #d5f2ef 0%, rgba(213, 242, 239, 0) 65%),
+          linear-gradient(180deg, var(--paper), var(--paper-2));
+        min-height: 100vh;
+      }
+
+      .noise {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+        mix-blend-mode: multiply;
+      }
+
+      header {
+        padding: 72px 6vw 36px;
+        display: grid;
+        gap: 20px;
+      }
+
+      .eyebrow {
+        font-size: 14px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+      }
+
+      h1 {
+        margin: 0;
+        font-family: "Shippori Mincho", serif;
+        font-weight: 700;
+        font-size: clamp(32px, 5vw, 56px);
+        line-height: 1.15;
+      }
+
+      .lead {
+        margin: 0;
+        max-width: 640px;
+        font-size: clamp(16px, 2.2vw, 20px);
+        color: var(--ink-soft);
+      }
+
+      main {
+        padding: 0 6vw 80px;
+        display: grid;
+        gap: 24px;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 28px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 24px 48px rgba(19, 33, 45, 0.08);
+        animation: rise 0.9s ease both;
+      }
+
+      .card:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+
+      .card:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+
+      .card-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        font-size: 20px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(14, 165, 160, 0.12);
+        color: var(--accent);
+        font-size: 12px;
+        letter-spacing: 0.1em;
+      }
+
+      .download-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+        margin-top: 16px;
+      }
+
+      .btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border: 1px solid rgba(14, 165, 160, 0.2);
+        background: linear-gradient(120deg, rgba(14, 165, 160, 0.16), rgba(14, 165, 160, 0.05));
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(14, 165, 160, 0.2);
+      }
+
+      .btn span {
+        font-size: 12px;
+        color: var(--ink-soft);
+      }
+
+      .info {
+        display: grid;
+        gap: 10px;
+        font-size: 14px;
+        color: var(--ink-soft);
+      }
+
+      .link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      footer {
+        padding: 24px 6vw 48px;
+        color: var(--ink-soft);
+        font-size: 12px;
+      }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 700px) {
+        header {
+          padding-top: 56px;
+        }
+
+        .card {
+          padding: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header>
+      <div class="eyebrow">Download</div>
+      <h1>Wireframe Studio</h1>
+      <p class="lead">
+        設計書の出力やコンポーネント分割など
+        あなたの実務で必要なワイヤーフレームツールです。
+      </p>
+    </header>
+
+    <main>
+      <section class="card">
+        <div class="card-title">
+          Windows
+          <span class="badge">MSI / EXE</span>
+        </div>
+        <div class="download-grid">
+          <a
+            class="btn"
+            href="https://github.com/undo-works/wireframe-app/releases/latest/download/WireframeStudio_0.1.0.msi"
+          >
+            WireframeStudio_0.1.0.msi
+            <span>推奨</span>
+          </a>
+          <a
+            class="btn"
+            href="https://github.com/undo-works/wireframe-app/releases/latest/download/WireframeStudio_0.1.0.exe"
+          >
+            WireframeStudio_0.1.0.exe
+            <span>軽量</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          Linux
+          <span class="badge">DEB / RPM</span>
+        </div>
+        <div class="download-grid">
+          <a
+            class="btn"
+            href="https://github.com/undo-works/wireframe-app/releases/latest/download/WireframeStudio_0.1.0.deb"
+          >
+            WireframeStudio_0.1.0.deb
+            <span>Debian系</span>
+          </a>
+          <a
+            class="btn"
+            href="https://github.com/undo-works/wireframe-app/releases/latest/download/WireframeStudio_0.1.0.rpm"
+          >
+            WireframeStudio_0.1.0.rpm
+            <span>Red Hat系</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-title">リリース情報</div>
+        <div class="info">
+          <div>最新バージョン: 0.1.0</div>
+          <div>
+            詳細:
+            <a
+              class="link"
+              href="https://github.com/undo-works/wireframe-app/releases/latest"
+              >Release Notes</a
+            >
+          </div>
+          <div>
+            リポジトリURLの OWNER / REPO を置き換えてください。
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © 2026 Wireframe Studio. Built for clarity and speed.
+    </footer>
+  </body>
+</html>

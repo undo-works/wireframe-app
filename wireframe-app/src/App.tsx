@@ -1,12 +1,12 @@
-import './App.css'
-import AppHeader from './components/header/AppHeader'
-import CanvasStage from './components/CanvasStage'
-import CanvasToolbar from './components/CanvasToolbar'
-import NewCanvasPanel from './components/NewCanvasPanel'
-import PagesPanel from './components/PagesPanel'
-import PropertiesPanel from './components/PropertiesPanel'
-import WorkspaceBar from './components/WorkspaceBar'
-import useCanvasProject from './hooks/useCanvasProject'
+import "./App.css";
+import AppHeader from "./components/header/AppHeader";
+import CanvasStage from "./components/CanvasStage";
+import CanvasToolbar from "./components/CanvasToolbar";
+import NewCanvasPanel from "./components/NewCanvasPanel";
+import PagesPanel from "./components/PagesPanel";
+import PropertiesPanel from "./components/PropertiesPanel";
+import WorkspaceBar from "./components/WorkspaceBar";
+import useCanvasProject from "./hooks/useCanvasProject";
 
 function App() {
   const {
@@ -36,7 +36,7 @@ function App() {
     updateSelectedNode,
     setActivePage,
     updateCanvas,
-  } = useCanvasProject()
+  } = useCanvasProject();
 
   return (
     <div className="app-shell">
@@ -53,7 +53,12 @@ function App() {
 
           <div className="workspace-frame">
             <div className="left-stack">
-              <NewCanvasPanel form={form} onChange={setForm} onCreate={handleCreateProject} error={error} />
+              <NewCanvasPanel
+                form={form}
+                onChange={setForm}
+                onCreate={handleCreateProject}
+                error={error}
+              />
               {project ? (
                 <PagesPanel
                   pages={project.pages}
@@ -64,7 +69,14 @@ function App() {
                   onRemove={handleRemovePage}
                 />
               ) : (
-                <PagesPanel pages={[]} activePageId="" onAdd={handleAddPage} onSelect={() => {}} onRename={() => {}} onRemove={() => {}} />
+                <PagesPanel
+                  pages={[]}
+                  activePageId=""
+                  onAdd={handleAddPage}
+                  onSelect={() => {}}
+                  onRename={() => {}}
+                  onRemove={() => {}}
+                />
               )}
             </div>
 
@@ -81,7 +93,9 @@ function App() {
                     canEditSelection={Boolean(selectedNode)}
                   />
                 ) : (
-                  <div className="canvas-top-empty">キャンバス設定を入力して新規作成してください。</div>
+                  <div className="canvas-top-empty">
+                    キャンバス設定を入力して新規作成してください。
+                  </div>
                 )}
               </div>
 
@@ -106,7 +120,10 @@ function App() {
             </div>
 
             <aside className="properties-panel">
-              <PropertiesPanel selectedNode={selectedNode} onUpdateNode={updateSelectedNode} />
+              <PropertiesPanel
+                selectedNode={selectedNode}
+                onUpdateNode={updateSelectedNode}
+              />
             </aside>
           </div>
         </section>
@@ -118,15 +135,15 @@ function App() {
         accept=".wire,.json"
         className="hidden"
         onChange={(event) => {
-          const file = event.target.files?.[0]
+          const file = event.target.files?.[0];
           if (file) {
-            handleOpenFile(file)
+            handleOpenFile(file);
           }
-          event.currentTarget.value = ''
+          event.currentTarget.value = "";
         }}
       />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

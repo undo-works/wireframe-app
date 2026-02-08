@@ -3,6 +3,17 @@
 作成日: 2026年1月31日
 対象: WireframeStudio の .deb 配布
 
+--- 
+
+## 0. ビルド
+
+Tauriでリリースビルドを作成します。
+
+```bash
+cd wireframe-app/src-tauri/
+npx tauri build
+```
+
 ---
 
 ## 1. 配布ファイルの場所
